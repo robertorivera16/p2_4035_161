@@ -95,6 +95,7 @@ public class DataFilePopulator {
 			e.getMessage();
 		} catch (IOException e) {
 			e.getMessage();
+			System.exit(0);
 		}
 
 		t.displayTable();
@@ -128,6 +129,8 @@ public class DataFilePopulator {
 				e.printStackTrace();
 			}
 		}
+		
+		t.displayTable();
 
 		System.out.println();
 		System.out.println("TERMINATED");

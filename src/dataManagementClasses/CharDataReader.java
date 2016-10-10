@@ -2,7 +2,6 @@ package dataManagementClasses;
 
 import java.util.Scanner;
 
-import generalUtilities.DataUtils;
 import interfaces.DataReader;
 
 public class CharDataReader implements DataReader {

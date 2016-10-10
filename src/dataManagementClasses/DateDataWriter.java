@@ -1,6 +1,5 @@
 package dataManagementClasses;
 
-import generalUtilities.DataUtils;
 import interfaces.DataWriter;
 
 public class DateDataWriter implements DataWriter {
