@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dataManagementClasses.AttributeInSchema;
@@ -70,23 +71,21 @@ public class DataFilePopulator {
 				ts.saveSchema(raf);
 				t = new Table(ts);
 			} else {
-				
+
 				raf = new RandomAccessFile(f, "rw");
 				ts = TableSchema.getInstance(raf);
-				
-				
+
 				if (!ts.isValid(raf)) {
 					System.out.println("FILE NOT VALID!");
 					System.exit(0);
 				}
 
 				t = new Table(ts);
-				
+
 				if (!(raf.length() == raf.getFilePointer())) {
 					t.readTableDataFromFile(raf);
 				}
-				
-				
+
 			}
 
 		} catch (FileNotFoundException e) {
@@ -99,29 +98,43 @@ public class DataFilePopulator {
 		}
 
 		t.displayTable();
-		int moreRec;
+		int moreRec = 0;
+		
+		do {
+			System.out.println("Do you want to add records? ENTER NUMBER ONLY: YES-(1) NO-(2)");
+			try {
+				moreRec = sc.nextInt();
+			} catch (InputMismatchException e) {
+				sc.nextLine(); //Clean Buffer
+			}
+		} while (moreRec != 1 && moreRec != 2);
 
-		System.out.println("Do you want to add records? YES-(1) NO-(2)");
-		moreRec = sc.nextInt();
 		sc.nextLine();
+
 		if (moreRec == 1) {
 			do {
 				Record r = t.getNewRecordInstance();
 				r.readDataRecordFromUser(sc);
 				t.addRecord(r);
-				System.out.println("Add more record? YES-(1) NO-(2)");
-				moreRec = sc.nextInt();
+				do {
+					System.out.println("Add more record? ENTER NUMBER ONLY: YES-(1) NO-(2)");
+					try {
+						moreRec = sc.nextInt();
+					} catch (InputMismatchException e) {
+						sc.nextLine(); //Clean Buffer
+					}
+				} while (moreRec != 1 && moreRec != 2);
 				sc.nextLine();
 
 			} while (moreRec == 1);
 		}
-		
+
 		try {
 			raf.seek(ts.posFirstRec(raf));
 		} catch (IOException e1) {
-	
+
 		}
-		
+
 		for (int i = 0; i < t.getNumberOfRecords(); i++) {
 			try {
 				t.getRecord(i).writeToFile(raf);
@@ -129,11 +142,12 @@ public class DataFilePopulator {
 				e.printStackTrace();
 			}
 		}
-		
+
 		t.displayTable();
 
 		System.out.println();
 		System.out.println("TERMINATED");
+		sc.close();
 
 	}
 
