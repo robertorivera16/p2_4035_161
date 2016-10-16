@@ -1,3 +1,5 @@
+JAVA Version 8 used in this project.
+
 Compiling from Eclipse:
 Use main class DataFilePopulator to start the process.
 

@@ -98,33 +98,45 @@ public class DataFilePopulator {
 		}
 
 		t.displayTable();
+		System.out.println();
+		System.out.println("COLUMN NUMBERS:");
+		t.displayAttributeTable();
+		System.out.println();
+		
 		int moreRec = 0;
 		
+		
+		//Random Access File Created and the program starts to ask for new records
 		do {
 			System.out.println("Do you want to add records? ENTER NUMBER ONLY: YES-(1) NO-(2)");
 			try {
 				moreRec = sc.nextInt();
+				sc.nextLine();
 			} catch (InputMismatchException e) {
-				sc.nextLine(); //Clean Buffer
+				System.out.println("INVALID INPUT!");
+				sc.nextLine();
 			}
 		} while (moreRec != 1 && moreRec != 2);
 
-		sc.nextLine();
 
 		if (moreRec == 1) {
 			do {
 				Record r = t.getNewRecordInstance();
-				r.readDataRecordFromUser(sc);
+				r.readDataRecordFromUser(sc); 
 				t.addRecord(r);
 				do {
+					moreRec = 0;
 					System.out.println("Add more record? ENTER NUMBER ONLY: YES-(1) NO-(2)");
 					try {
 						moreRec = sc.nextInt();
+						sc.nextLine();
 					} catch (InputMismatchException e) {
-						sc.nextLine(); //Clean Buffer
+						sc.nextLine();
+						System.out.println("INVALID INPUT!");
 					}
 				} while (moreRec != 1 && moreRec != 2);
-				sc.nextLine();
+				
+				
 
 			} while (moreRec == 1);
 		}
