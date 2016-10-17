@@ -30,7 +30,7 @@ public class DataFilePopulator {
 		Table t = null;
 
 		try {
-			File f = new File("src/inputData/" + args[0] + ".txt");
+			File f = new File("src/inputData/" + args[0]);
 			if (!f.exists()) {
 				do {
 					System.out.println("Enter number of attributes that it will contain");
@@ -99,9 +99,8 @@ public class DataFilePopulator {
 
 		t.displayTable();
 		System.out.println();
-		System.out.println("COLUMN NUMBERS:");
-		t.displayAttributeTable();
-		System.out.println();
+		
+	
 		
 		int moreRec = 0;
 		

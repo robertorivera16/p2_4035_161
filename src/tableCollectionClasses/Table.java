@@ -12,24 +12,42 @@ public class Table {
 	private ArrayList<Record> rList;
 	private int recordLength;
 
+	/**
+	 * Construct a table with the information given by the parameter that it receives.
+	 * @param ts TableSchema
+	 */
 	public Table(TableSchema ts) {
 		this.ts = ts;
 		recordLength = ts.getDataRecordLength();
 		rList = new ArrayList<>();
 	}
 
+	/**
+	 * Returns the Attribute in Schema in the given index
+	 * @param index index of the attribute in the schema
+	 * @return Returns the Attribute in Schema in the given index
+	 */
 	public AttributeInSchema getAttribute(int index) {
 		return ts.getAttr(index);
 	}
 
+	/**
+	 * @return The number of attributes in the tableSchema
+	 */
 	public int getNumberOfAttrs() {
 		return ts.getNumberOfAttrs();
 	}
 
+	/**
+	 * @return the number of rows or Records in the table
+	 */
 	public int getNumberOfRecords() {
 		return rList.size();
 	}
 
+	/**
+	 * @return a new instance of Record
+	 */
 	public Record getNewRecordInstance() {
 		return new Record(ts);
 	}
@@ -56,6 +74,10 @@ public class Table {
 			System.out.println(r);
 	}
 
+	/**
+	 * Displays a table consisting of name of attribute and its type; 
+	 * also, with a number for the selection of them.  
+	 */
 	public void displayAttributeTable() {
 		String s = "| ";
 		for (int i = 0; i < getNumberOfAttrs(); i++) {

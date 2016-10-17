@@ -9,6 +9,11 @@ public class Attribute {
 	private String name; 
 	private int tIndex;         // id of the attribute's data type
 	
+	/**
+	 * Construct an attribute with the given name and type index
+	 * @param name Name of the attribute
+	 * @param tIndex Type Index
+	 */
 	public Attribute(String name, int tIndex) 
 	{ 
 		this.name = name; 
@@ -38,6 +43,7 @@ public class Attribute {
 		return tIndex;
 	}
 
+	
 	public void writeToFile(RandomAccessFile file) throws IOException { 
 		file.writeByte((byte) tIndex);
 		file.writeByte((byte) name.length()); 
